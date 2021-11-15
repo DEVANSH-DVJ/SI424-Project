@@ -11,9 +11,9 @@ if __name__ == '__main__':
     population_cy = population.drop(
         columns=['Age', 'OpenInterval', 'Female1', 'Male1',
                  'Total1', 'Female2', 'Male2']).groupby(by=['Country', 'Year']).sum()
-    increase_cy = population_cy.diff().dropna()
+
     for country in countries:
-        # population_cy['Total2'][country].plot()
-        (population_cy['Total2'][country].diff().dropna() / population_cy['Total2'][country]).plot()
-        plt.show()
+        (population_cy['Total2'][country].diff()[1:] /
+         population_cy['Total2'][country][1:] * 100).plot()
+    plt.show()
     exit(0)

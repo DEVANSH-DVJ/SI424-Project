@@ -11,8 +11,18 @@ if __name__ == '__main__':
     population_ca = population.drop(
         columns=['OpenInterval', 'Female1', 'Male1',
                  'Total1', 'Female2', 'Male2']).groupby(['Country', 'Age']).sum()
-    # print(population_ca)
-    for country in countries:
-        population_ca['Total2'][country].plot()
-        plt.show()
+
+    for i in range(len(countries)):
+        country = countries[i]
+        plt.scatter(population_ca['Total2'][country],
+                    [i]*len(population_ca['Total2'][country]), label=country)
+        print(len(population_ca['Total2'][country]), country)
+    plt.grid()
+    plt.legend()
+    plt.show()
+    for i in range(len(countries)):
+        country = countries[i]
+        (population_ca['Total2'][country] / population_ca['Total2'][country].sum()).plot()
+    plt.show()
+
     exit(0)

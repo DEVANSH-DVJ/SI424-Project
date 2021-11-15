@@ -12,8 +12,16 @@ if __name__ == '__main__':
         columns=['Age', 'Female1', 'Male1',
                  'Total1', 'Total2', 'OpenInterval']).groupby(by=['Country', 'Year']).sum()
     ratio_cy = population_cy['Female2'] / population_cy['Male2']
-    for country in countries:
-        ratio_cy[country].plot.box()
+    for i in range(len(countries)):
+        country = countries[i]
+        plt.scatter(ratio_cy[country], [i]*len(ratio_cy[country]), label=country)
+        print(len(ratio_cy[country]), country)
+    plt.grid()
+    plt.legend()
+    plt.show()
+    for i in range(len(countries)):
+        country = countries[i]
+        ratio_cy[country].plot()
+    plt.show()
 
-        plt.show()
     exit(0)

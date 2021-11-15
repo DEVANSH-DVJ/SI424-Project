@@ -22,9 +22,9 @@ if __name__ == '__main__':
 
     for i in range(len(countries)):
         country = countries[i]
-        plt.scatter(population_cy['Total2'][country],
-                    [i]*len(population_cy['Total2'][country]), label=country)
-        print(len(population_cy['Total2'][country]), country)
+        plt.scatter(rate_cy[country],
+                    [i]*len(rate_cy[country]), label=country)
+        print(len(rate_cy[country]), country)
     plt.grid()
     plt.legend()
     plt.show()
@@ -34,7 +34,7 @@ if __name__ == '__main__':
         # plt.show()
         # population_cy['Total2'][country].plot()
         # plt.show()
-        # rate_cy[country].plot()
-        # plt.show()
+        rate_cy[country].plot()
+    plt.show()
 
     exit(0)
