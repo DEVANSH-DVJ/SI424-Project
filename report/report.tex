@@ -129,9 +129,58 @@ The GitHub repository can accessed at:
 
 %write here
 
+$\mathcal{N}(\mu, \sigma^2)$ denotes the Normal distribution with mean $\mu$ and variance $\sigma^2$.
+
+\begin{comment}
+It has the probability distribution: $p(x) = \dfrac{1}{\sqrt{2 \pi \sigma^2}} \exp \left(\dfrac{-(x-\mu)^2}{2 \sigma^2}\right)$
+\end{comment}
+
 \vspace{7pt}
 
 \myline
+
+
+\newpage
+
+%write here
+\textbf{Parameter estimation Problem 1:} \\
+We have two countries - Italy and Australia. \\
+The population growth rate of Italy follows $\mathcal{N}(\mu_1, \sigma_1^2)$, while that of Australia follows $\mathcal{N}(\mu_2, \sigma_2^2)$. \\
+Given samples of population growth rate for both countries, determine the parameters $\mu_1, \sigma_1^2, \mu_2, \sigma_2^2$. \\
+
+\vspace{15pt}
+
+\textbf{Parameter estimation Problem 2:} \\
+The graph of USA population vs age, looks like the Half Normal distribution, with pdf:
+\begin{equation*}
+     \begin{aligned}
+           & Y \sim \mathcal{N}(0, \sigma^2)                                                                                            \\
+           & X = |Y|                                                                                                                    \\
+           & p_X(x) = \dfrac{\sqrt{2}}{\sqrt{ \pi \sigma^2}} \exp \left(\frac{-x^2}{2 \sigma^2} \right), \hspace{10pt} \forall x \geq 0 \\
+     \end{aligned}
+\end{equation*}
+Given a sample of age of people, determine the parameter $\sigma$ for this distribution. \\
+
+\vspace{15pt}
+
+\textbf{Hypothesis Testing Problem 1:} \\
+We have two countries - Italy and Australia. \\
+We have gender ratios $r = (r_1, ..., r_n)$ of different years given to us for a specific country. \\
+We observe that $r_i \sim \mathrm{Uniform}[\theta-\beta, \theta+\beta]$. \\
+H0: Country is Italy \\
+H1: Country is Australia \\
+Test1: We reject H0 if $\mathrm{mean}(r) < 1.0$ \\
+Test2: We reject H0 if $\theta_{MLE} = \dfrac{max(r) + min(r)}{2} < 1.0$ \\
+
+\vspace{15pt}
+
+\textbf{Hypothesis Testing Problem 2:} \\
+We have two countries - Italy and Australia. \\
+We have population growth rate $g = (g_1, ..., g_n)$ of different years given to us for a specific country. \\
+We observe that $g_i \sim \mathcal{N}(\mu, \sigma^2)$ \\
+H0: Country is Italy \\
+H1: Country is Australia \\
+Test: We reject H0 if $\mu_{MLE} = \text{mean}(g) < 1.2$ \\
 
 
 
