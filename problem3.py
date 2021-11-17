@@ -67,9 +67,48 @@ def run(rls, K, N):
 
 
 if __name__ == '__main__':
+    # Set seed
     np.random.seed(0)
+
+    # Initialize
     rls = init()
-    for N in [10, 100, 1000]:
-        for K in range(1, 98, 10):
+
+    for N in [10, 100, 1000, 10000]:
+        type1_1 = []
+        type2_1 = []
+        type1_2 = []
+        type2_2 = []
+
+        for K in range(1, 98, 1):
+            # Run the experiment for given K, N
             t1, t2 = run(rls, K, N)
             print('N={}, K={}, t1=[{},{}], t2=[{},{}]'.format(N, K, *t1, *t2))
+
+            type1_1.append(t1[0, 1] * 2)
+            type2_1.append(t1[1, 0] * 2)
+            type1_2.append(t2[0, 1] * 2)
+            type2_2.append(t2[1, 0] * 2)
+
+        # Plot Type I error
+        plt.clf()
+        plt.plot(range(1, 98, 1), type1_1, label='Test 1')
+        plt.plot(range(1, 98, 1), type1_2, label='Test 2')
+        plt.xlabel('K')
+        plt.ylim((-0.02, 0.32))
+        plt.ylabel('Average Type I error')
+        plt.title('Performed {} experiments for each K'.format(N))
+        plt.grid()
+        plt.legend()
+        plt.savefig('plots/problem3/type1_{}.png'.format(N))
+
+        # Plot Type I error
+        plt.clf()
+        plt.plot(range(1, 98, 1), type2_1, label='Test 1')
+        plt.plot(range(1, 98, 1), type2_2, label='Test 2')
+        plt.xlabel('K')
+        plt.ylim((-0.01, 0.45))
+        plt.ylabel('Average Type II error')
+        plt.title('Performed {} experiments for each K'.format(N))
+        plt.grid()
+        plt.legend()
+        plt.savefig('plots/problem3/type2_{}.png'.format(N))
