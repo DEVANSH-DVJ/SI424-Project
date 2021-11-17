@@ -4,31 +4,32 @@ import matplotlib.pyplot as plt
 
 
 def init():
+    # Extract required data
     data_file = 'PS/mortality_Country.csv'
     data = pd.read_csv(data_file, sep=',').drop(columns='Unnamed: 0')
     data_cya = data.drop(
         columns=['Female', 'Male', 'OpenInterval']).groupby(['Country', 'Year', 'Age']).sum()
-    data_cdf = (data_cya['Total']['GRC'][2005] / data_cya['Total']['GRC'][2005].sum()).cumsum()
 
-    md = np.zeros((111, 2))
-    for i in range(110):
-        md[i, 1] = data_cdf[i]
-        md[i+1, 0] = data_cdf[i]
-    md[110, 1] = 1.0
-
-    return md
+    # Probability of each age interval
+    aps = (data_cya['Total']['GRC'][2005] / data_cya['Total']['GRC'][2005].sum())
+    return aps
 
 
-def estimator(md, K):
-    uni = np.random.rand(K, 1)
-    agelist = np.argmax((md[:, 0] <= uni) & (md[:, 1] > uni), axis=1)
+def estimator(agelist):
+    # The estimate is the mean
     return agelist.mean()
 
 
-def run(md, K, N):
+def run(aps, K, N):
     estimates = np.zeros((N, 1))
+
     for i in range(N):
-        estimates[i] = estimator(md, K)
+        # Generate age in [0, 111) with the above computed probabilities
+        agelist = np.random.choice(111, K, p=aps)
+        # Save the estimated value
+        estimates[i] = estimator(agelist)
+
+    # Return average estimated value and std. deviation of estimated value
     return estimates.mean(), estimates.std(ddof=1)
 
 
