@@ -34,8 +34,40 @@ def run(aps, K, N):
 
 
 if __name__ == '__main__':
+    # Set seed
     np.random.seed(0)
-    md = init()
+
+    # Initialize
+    aps = init()
+
     for N in [10, 100, 1000]:
-        for K in [1, 5, 10, 50, 100, 1000, 10000]:
-            print('N={}, K={}, p={}'.format(N, K, run(md, K, N)))
+        avgs = []
+        stds = []
+
+        for K in range(10, 5000, 10):
+            # Run the experiment for given K, N
+            est_info = run(aps, K, N)
+            print('N={}, K={}, p={}'.format(N, K, est_info))
+
+            avgs.append(est_info[0])
+            stds.append(est_info[1])
+
+        # Plot Avg
+        plt.clf()
+        plt.plot(range(10, 5000, 10), avgs)
+        plt.xlabel('K')
+        plt.ylim((74.0, 77.0))
+        plt.ylabel('Average estimated value of p')
+        plt.title('Performed {} experiments for each K'.format(N))
+        plt.grid()
+        plt.savefig('plots/problem2/avgs_{}.png'.format(N))
+
+        # Plot Std. dev.
+        plt.clf()
+        plt.plot(range(10, 5000, 10), stds)
+        plt.xlabel('K')
+        plt.ylim((-0.1, 5.5))
+        plt.ylabel('Std. deviation of estimated value of p')
+        plt.title('Performed {} experiments for each K'.format(N))
+        plt.grid()
+        plt.savefig('plots/problem2/stds_{}.png'.format(N))
