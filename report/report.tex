@@ -144,7 +144,7 @@ It has the probability distribution: $p(x) = \dfrac{1}{\sqrt{2 \pi \sigma^2}} \e
 \subsection{Description}
 
 The population growth rate of Italy follows $\mathcal{N}(\mu, \sigma^2)$ distribution. \\
-We have population growth rate $g = (g_1, ..., g_n)$ of different years given to us for Italy. \\
+We have population growth rate $g = (g_1, \cdots ,g_n)$ of different years given to us for Italy. \\
 Estimated values are $\hat{\mu}_{MLE} = \mathrm{mean}(g)$ and $\hat{\sigma^2}_{MLE} = \mathrm{mean}((g - \hat{\mu}_{MLE})^2)$.
 
 \subsection{Experiment}
@@ -153,6 +153,7 @@ The population growth rates are computed as percentage change in population (usi
 The size of the unordered list is 147 for Italy. \\
 We randomly choose a $K$ sized subset $(K \le 147)$ of the list. We compute the estimate of $\mu$ and $\sigma^2$ ($\hat{\mu}_{MLE}$ and $\hat{\sigma^2}_{MLE}$). We repeat this for $N$ iterations. \\
 We intend to observe the variation in our estimate of $\mu$ and $\sigma^2$ for different $K$ and $N$.
+
 
 \subsection{Results}
 
@@ -164,13 +165,15 @@ We intend to observe the variation in our estimate of $\mu$ and $\sigma^2$ for d
 \section{Parameter estimation Problem 2}
 \subsection{Description}
 The age of people who died in Greece in 2005 follows $\mathrm{Binomial}(p, 110)$. \\
-We have age $a = (a_1, ..., a_n)$ of people who died in Greece in 2005 given to us. \\
+We have age $a = (a_1, \cdots ,a_n)$ of people who died in Greece in 2005 given to us. \\
 Estimated value of $p$ is $\hat{p}_{MLE} = \mathrm{mean}(a)$.
 
 \subsection{Experiment}
-From \verb!mortality_Country.csv!, we extract percentage of deaths in Greece in 2005 for each age interval. \\
-We generate a procedure which returns age of a person based on this percentage distribution. We do this by using the CDF generated using the obtained percentage distribution and randomly sample real value in $[0, 1]$ and use this to get the age to return. \\
-Using the above defined procedure, we generate a $K$ sized list of ages. We compute the estimate of $p$ ($\hat{p}_{MLE}$). We repeat this for $N$ iterations. \\
+\verb!mortality_Country.csv! contains total deaths per age interval, we cannot generate $a$ directly. \\
+We extract percentage of deaths in Greece in 2005 for each age interval. \\
+We define a procedure which returns age of a person based on this percentage distribution. \\
+We do this by using the CDF generated using the obtained percentage distribution and randomly sample real value in $[0, 1]$ and use this to get the age. \\
+Using the above defined procedure, we generate a $K$ sized list of ages, and compute the estimate of $p$ ($\hat{p}_{MLE}$). We repeat this for $N$ iterations. \\
 We intend to observe the variation in our estimate of $p$ for different $K$ and $N$.
 
 \subsection{Results}
@@ -183,7 +186,7 @@ We intend to observe the variation in our estimate of $p$ for different $K$ and 
 \section{Hypothesis Testing Problem 1}
 \subsection{Description}
 We have two countries - Italy and Australia. \\
-We have gender ratios $r = (r_1, ..., r_n)$ of different years given to us for a specific country. \\
+We have gender ratios $r = (r_1, \cdots ,r_n)$ of different years given to us for a specific country. \\
 We observe that $r_i \sim \mathrm{Uniform}[\theta-\beta, \theta+\beta]$. \\
 H0: Country is Italy \\
 H1: Country is Australia \\
@@ -207,11 +210,11 @@ We intend to observe the values of Type I error and Type II error for both the t
 \section{Hypothesis Testing Problem 2}
 \subsection{Description}
 We have two countries - Italy and Australia. \\
-We have population growth rate $g = (g_1, ..., g_n)$ of different years given to us for a specific country. \\
-We observe that $g_i \sim \mathcal{N}(\mu, \sigma^2)$ \\
+We have population growth rate $g = (g_1, \cdots ,g_n)$ of different years given to us for a specific country. \\
+We observe that, if the ``specific country'' is Italy, $g_i \sim \mathcal{N}(\mu_1, \sigma_1^2)$; and if the ``specific country'' is Australia, $g_i \sim \mathcal{N}(\mu_2, \sigma_2^2)$. \\
 H0: Country is Italy \\
 H1: Country is Australia \\
-Test: Reject H0 if $\hat{\mu}_{MLE} = \mathrm{mean}(g) < 1.2$
+Test: Reject H0 if $\hat{\mu}_{MLE} = \mathrm{mean}(g) > 1.2$
 
 \subsection{Experiment}
 From \verb!population_Country.csv!, we extract one unordered lists of population growth rate for both countries. \\
