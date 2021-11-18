@@ -66,11 +66,11 @@ if __name__ == '__main__':
 
         for K in range(1, 98, 1):
             # Run the experiment for given K, N
-            t1 = run(gls, K, N)
-            print('N={}, K={}, t1=[{},{}]'.format(N, K, *t1))
+            t = run(gls, K, N)
+            print('N={}, K={}, t=[{},{}]'.format(N, K, *t))
 
-            type1.append(t1[0, 1] * 2)
-            type2.append(t1[1, 0] * 2)
+            type1.append(t[0, 1] * 2)
+            type2.append(t[1, 0] * 2)
 
         # Plot Type I error
         plt.clf()
