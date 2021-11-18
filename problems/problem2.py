@@ -17,7 +17,7 @@ def init():
 
 def estimator(agelist):
     # The estimate is the mean
-    return agelist.mean()
+    return agelist.mean() / 110
 
 
 def run(aps, K, N):
@@ -56,7 +56,7 @@ if __name__ == '__main__':
         plt.clf()
         plt.plot(range(10, 5000, 10), avgs)
         plt.xlabel('K')
-        plt.ylim((74.0, 77.0))
+        plt.ylim((0.674, 0.701))
         plt.ylabel('Average estimated value of p')
         plt.title('Performed {} experiments for each K'.format(N))
         plt.grid()
@@ -66,7 +66,7 @@ if __name__ == '__main__':
         plt.clf()
         plt.plot(range(10, 5000, 10), stds)
         plt.xlabel('K')
-        plt.ylim((-0.1, 5.5))
+        plt.ylim((-0.002, 0.048))
         plt.ylabel('Std. deviation of estimated value of p')
         plt.title('Performed {} experiments for each K'.format(N))
         plt.grid()
