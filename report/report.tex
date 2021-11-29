@@ -135,7 +135,7 @@ From the above obtained plot and histogram, we can approximate population growth
 
 \subsection{Problem Description}
 We assume that the population growth rate of Italy follows $\mathcal{N}(\mu, \sigma^2)$ distribution. \\
-We are given a sample of population growth rate $g = (g_1, \dots ,g_K)$ where $K$ is the sample size. \\
+We are given a sample of population growth rate $g = (g_1, \dots, g_K)$ where $K$ is the sample size. \\
 Estimated values are $\hat{\mu}_{MLE} = \mathrm{mean}(g)$ and $\hat{\sigma}_{MLE} = \sqrt{ \mathrm{mean}((g - \hat{\mu}_{MLE})^2) }$. \\
 We perform this experiment for $N$ iterations for a fixed $K$. \\
 We analyze the observed estimated of $\mu$ and $\sigma$ for different $K$ and $N$. \\
@@ -338,23 +338,44 @@ We use function \verb!numpy.random.choice! with suitable arguments to obtain thi
 \newpage
 \section{Hypothesis Testing Problem 1}
 \setcounter{figure}{0}
-\subsection{Description}
-We have two countries - Italy and Australia. \\
-We have gender ratios $r = (r_1, \dots ,r_n)$ of different years given to us for a specific country. \\
-We observe that $r_i \sim \mathrm{Uniform}[\theta-\beta, \theta+\beta]$. \\
-Given a sample, we hypothesise H0 (Null hypothesis) and H1 (Alternative hypothesis). \\
-H0: Country is Italy \\
-H1: Country is Australia \\
-We perform following tests to accept/reject H0. \\
-Test1: Reject H0 if $\mathrm{mean}(r) < 1.0$ \\
-Test2: Reject H0 if $\hat{\theta}_{MLE} = \dfrac{\mathrm{max}(r) + \mathrm{min}(r)}{2} < 1.0$.
+\subsection{Analysis of Gender Ratio}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{P3/plot_ita.png}
+        \caption[]{Plot of Gender Ratio of Italy Vs Year}
+    \end{subfigure}
+    \begin{subfigure}[H]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{P3/plot_aus.png}
+        \caption[]{Plot of Gender Ratio of Australia Vs Year}
+    \end{subfigure}
+    \caption{Analysis of Gender Ratio for Italy and Australia}
+\end{figure}
 
-\subsection{Experiment}
-From \verb!population_Country.csv!, we extract one unordered list of gender ratios for both countries. \\
+From the above obtained plot, we can approximate gender ratios to be linear w.r.t. year. \\
+Thus, we can conclude that gender ratio of Italy $\sim \mathrm{Uniform}[\theta_1 - \beta_1, \theta_1 + \beta_1]$. \\
+Similarly, gender ratio of Australia $\sim \mathrm{Uniform}[\theta_2 - \beta_2, \theta_2 + \beta_2]$.
+
+\subsection{Problem Description}
+We assume that the gender ratio of Italy follows $\mathrm{Uniform}[\theta_1 - \beta_1, \theta_1 + \beta_1]$ distribution and that of Australia follows $\mathrm{Uniform}[\theta_2 - \beta_2, \theta_2 + \beta_2]$ distribution. \\
+We are given a sample of gender ratio $\mathbf{r} = (r_1, \dots, r_K)$ where $K$ is the sample size which belongs to one of the above two mentioned distributions. \\
+We devise a simple hypothesis: \\
+H0: Country is Italy (i.e. $\theta$ = $\theta_1$) \\
+H1: Country is Australia (i.e. $\theta = \theta_2$) \\
+We perform following tests to accept/reject H0. \\
+Test1: Reject H0 if $\mathrm{mean}(\mathbf{r}) < 1.0$ \\
+Test2: Reject H0 if $\hat{\theta}_{MLE} = \dfrac{\mathrm{max}(\mathbf{r}) + \mathrm{min}(\mathbf{r})}{2} < 1.0$ \\
+We perform this experiment for $2N$ iterations for a fixed $K$, choosing each distribution as the true distribution for $N$ iterations. \\
+We analyze the observed values of Type I and Type II errors for the tests for different $K$ and $N$.
+
+\subsection{Generation of Sample}
+From \verb!population_Country.csv!, we determine year-wise gender ratio for Italy from 1872 to 2018 (list of size 147) and for Australia from 1921 to 2018 (list of size 98). \\
 The gender ratios are computed as ratio of total female population (using \verb!Female2! column) and total male population (using \verb!Male2! column) for every year. \\
-The size of the unordered list is 147 for Italy and 98 for Australia. \\
-We randomly choose a $K$ sized subset $(K \le 98)$ of one of the lists. We compare the output of both the tests with the true value. We repeat this for $2N$ iterations, where both countries have true value for $N$ iterations (to avoid dominance of either side of hypothesis). \\
-We intend to observe the values of Type I error and Type II error for both the tests for different $K$ and $N$.
+Our $K$-sized sample is a randomly chosen $K$-sized subset $(K \le 98)$ of one of the above obtained list. \\
+For first $N$ iterations, we choose from list of Italy. For latter $N$ iterations, we choose from list of Australia. \\
+We use function \verb!numpy.random.choice! with suitable arguments to obtain this sample. \\
 
 \subsection{Results}
 \begin{figure}[H]
@@ -371,7 +392,7 @@ We intend to observe the values of Type I error and Type II error for both the t
     \end{subfigure}
     \caption{Number of iterations for each side of hypothesis as truth, $N = 10$}
 \end{figure}
-\newpage
+\vspace{0pt}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.49\textwidth}
@@ -386,7 +407,7 @@ We intend to observe the values of Type I error and Type II error for both the t
     \end{subfigure}
     \caption{Number of iterations for each side of hypothesis as truth, $N = 100$}
 \end{figure}
-\vspace{30pt}
+\newpage
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.49\textwidth}
@@ -401,7 +422,7 @@ We intend to observe the values of Type I error and Type II error for both the t
     \end{subfigure}
     \caption{Number of iterations for each side of hypothesis as truth, $N = 1000$}
 \end{figure}
-\newpage
+\vspace{0pt}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.49\textwidth}
@@ -450,7 +471,7 @@ Similarly, population growth rate of Australia $\sim \mathcal{N}(\mu_2, \sigma_2
 
 \subsection{Problem Description}
 We assume that the population growth rate of Italy follows $\mathcal{N}(\mu_1, \sigma_1^2)$ distribution and that of Australia follows $\mathcal{N}(\mu_2, \sigma_2^2)$ distribution. \\
-We are given a sample of population growth rate $\mathbf{g} = (g_1, \dots ,g_K)$ where $K$ is the sample size which belongs to one of the above two mentioned distributions. \\
+We are given a sample of population growth rate $\mathbf{g} = (g_1, \dots, g_K)$ where $K$ is the sample size which belongs to one of the above two mentioned distributions. \\
 We devise a simple hypothesis: \\
 H0: Country is Italy (i.e. $\mu$ = $\mu_1$) \\
 H1: Country is Australia (i.e. $\mu = \mu_2$) \\
