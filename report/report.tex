@@ -113,7 +113,7 @@ $\mathrm{min}(x)$ denotes minimum of elements in vector $x$.
 
 
 \newpage
-\section{Parameter estimation Problem 1}
+\section{Parameter Estimation Problem 1}
 \setcounter{figure}{0}
 \subsection{Analysis of Population Growth Rate}
 \begin{figure}[H]
@@ -135,7 +135,7 @@ From the above obtained plot and histogram, we can approximate population growth
 
 \subsection{Problem Description}
 We assume that the population growth rate of Italy follows $\mathcal{N}(\mu, \sigma^2)$ distribution. \\
-We are given a sample of population growth rate $g = (g_1, \dots, g_K)$ where $K$ is the sample size. \\
+We are given a sample of population growth rate $g = (g_1, \dots, g_K)$, where $K$ is the sample size. \\
 Estimated values are $\hat{\mu}_{MLE} = \mathrm{mean}(g)$ and $\hat{\sigma}_{MLE} = \sqrt{ \mathrm{mean}((g - \hat{\mu}_{MLE})^2) }$. \\
 We perform this experiment for $N$ iterations for a fixed $K$. \\
 We analyze the observed estimated of $\mu$ and $\sigma$ for different $K$ and $N$. \\
@@ -250,7 +250,7 @@ We use function \verb!numpy.random.choice! with suitable arguments to obtain thi
 
 
 \newpage
-\section{Parameter estimation Problem 2}
+\section{Parameter Estimation Problem 2}
 \setcounter{figure}{0}
 \subsection{Analysis of Age of death}
 \begin{figure}[H]
@@ -268,7 +268,7 @@ Here, the random variable is the age of death in Greece in 2005 which is a discr
 
 \subsection{Problem Description}
 We assume that the age of people who died in Greece in 2005 follows $\mathrm{Binomial}(p, 110)$. \\
-We are given a sample of age of death $a = (a_1, \dots, a_K)$ where $K$ is the sample size. \\
+We are given a sample of age of death $a = (a_1, \dots, a_K)$, where $K$ is the sample size. \\
 Estimated value of $p$ is $\hat{p}_{MLE} = \mathrm{mean}(a) / 110$.
 We perform this experiment for $N$ iterations for a fixed $K$. \\
 We analyze the observed estimated of $p$ for different $K$ and $N$. \\
@@ -360,7 +360,7 @@ Similarly, gender ratio of Australia $\sim \mathrm{Uniform}[\theta_2 - \beta_2, 
 
 \subsection{Problem Description}
 We assume that the gender ratio of Italy follows $\mathrm{Uniform}[\theta_1 - \beta_1, \theta_1 + \beta_1]$ distribution and that of Australia follows $\mathrm{Uniform}[\theta_2 - \beta_2, \theta_2 + \beta_2]$ distribution. \\
-We are given a sample of gender ratio $\mathbf{r} = (r_1, \dots, r_K)$ where $K$ is the sample size which belongs to one of the above two mentioned distributions. \\
+We are given a sample of gender ratio $\mathbf{r} = (r_1, \dots, r_K)$, where $K$ is the sample size, which belongs to one of the above two mentioned distributions. \\
 We devise a simple hypothesis: \\
 H0: Country is Italy (i.e. $\theta$ = $\theta_1$) \\
 H1: Country is Australia (i.e. $\theta = \theta_2$) \\
@@ -471,7 +471,7 @@ Similarly, population growth rate of Australia $\sim \mathcal{N}(\mu_2, \sigma_2
 
 \subsection{Problem Description}
 We assume that the population growth rate of Italy follows $\mathcal{N}(\mu_1, \sigma_1^2)$ distribution and that of Australia follows $\mathcal{N}(\mu_2, \sigma_2^2)$ distribution. \\
-We are given a sample of population growth rate $\mathbf{g} = (g_1, \dots, g_K)$ where $K$ is the sample size which belongs to one of the above two mentioned distributions. \\
+We are given a sample of population growth rate $\mathbf{g} = (g_1, \dots, g_K)$, where $K$ is the sample size, which belongs to one of the above two mentioned distributions. \\
 We devise a simple hypothesis: \\
 H0: Country is Italy (i.e. $\mu$ = $\mu_1$) \\
 H1: Country is Australia (i.e. $\mu = \mu_2$) \\
