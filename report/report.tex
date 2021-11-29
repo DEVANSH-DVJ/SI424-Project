@@ -135,7 +135,7 @@ From the above obtained plot and histogram, we can approximate population growth
 
 \subsection{Problem Description}
 We assume that the population growth rate of Italy follows $\mathcal{N}(\mu, \sigma^2)$ distribution. \\
-We are given a sample of population growth rate $g = (g_1, \cdots ,g_K)$ where $K$ is the sample size. \\
+We are given a sample of population growth rate $g = (g_1, \dots ,g_K)$ where $K$ is the sample size. \\
 Estimated values are $\hat{\mu}_{MLE} = \mathrm{mean}(g)$ and $\hat{\sigma}_{MLE} = \sqrt{ \mathrm{mean}((g - \hat{\mu}_{MLE})^2) }$. \\
 We perform this experiment for $N$ iterations for a fixed $K$. \\
 We analyze the observed estimated of $\mu$ and $\sigma$ for different $K$ and $N$. \\
@@ -223,7 +223,7 @@ We use function \verb!numpy.random.choice! with suitable arguments to obtain thi
     \end{subfigure}
     \caption{Number of iterations, $N = 100$}
 \end{figure}
-\vspace{30pt}
+\vspace{0pt}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.49\textwidth}
@@ -252,18 +252,32 @@ We use function \verb!numpy.random.choice! with suitable arguments to obtain thi
 \newpage
 \section{Parameter estimation Problem 2}
 \setcounter{figure}{0}
-\subsection{Description}
-The age of people who died in Greece in 2005 follows $\mathrm{Binomial}(p, 110)$. \\
-We have age $a = (a_1, \cdots ,a_n)$ of people who died in Greece in 2005 given to us. \\
-Estimated value of $p$ is $\hat{p}_{MLE} = \mathrm{mean}(a) / 110$.
+\subsection{Analysis of Age of death}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.59\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{P2/plot.png}
+        \caption[]{Probability distribution of Age of death in Greece in 2005}
+    \end{subfigure}
+    \caption{Analysis of Age of death in Greece in 2005}
+\end{figure}
 
-\subsection{Experiment}
+We can approximate the obtained probability mass function as $\mathrm{Binomial}(p, 110)$. \\
+Here, the random variable is the age of death in Greece in 2005 which is a discrete random variable taking value in $\{0, \dots, 110\}$. \\
+
+\subsection{Description}
+We assume that the age of people who died in Greece in 2005 follows $\mathrm{Binomial}(p, 110)$. \\
+We are given a sample of age of death $a = (a_1, \dots, a_K)$ where $K$ is the sample size. \\
+Estimated value of $p$ is $\hat{p}_{MLE} = \mathrm{mean}(a) / 110$.
+We perform this experiment for $N$ iterations for a fixed $K$. \\
+We analyze the observed estimated of $p$ for different $K$ and $N$. \\
+
+\subsection{Generation of Sample}
 \verb!mortality_Country.csv! contains total deaths per age interval, we cannot generate $a$ directly. \\
-We extract percentage of deaths in Greece in 2005 for each age interval. \\
-We define a procedure which returns age of a person based on this percentage distribution. \\
-We do this by using the CDF generated using the obtained percentage distribution and randomly sample real value in $[0, 1]$ and use this to get the age. \\
-Using the above defined procedure, we generate a $K$ sized list of ages, and compute the estimate of $p$ ($\hat{p}_{MLE}$). We repeat this for $N$ iterations. \\
-We intend to observe the variation in our estimate of $p$ for different $K$ and $N$.
+We extract probability distribution of age of death in Greece in 2005 for each age interval. \\
+Our $K$-sized sample is a randomly generated $K$-sized list of ages with above obtained probability distribution. \\
+We use function \verb!numpy.random.choice! with suitable arguments to obtain this sample. \\
 
 \subsection{Results}
 \begin{figure}[H]
@@ -280,7 +294,7 @@ We intend to observe the variation in our estimate of $p$ for different $K$ and 
     \end{subfigure}
     \caption{Number of iterations, $N = 10$}
 \end{figure}
-\newpage
+\vspace{30pt}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.49\textwidth}
@@ -295,7 +309,7 @@ We intend to observe the variation in our estimate of $p$ for different $K$ and 
     \end{subfigure}
     \caption{Number of iterations, $N = 100$}
 \end{figure}
-\vspace{0pt}
+\newpage
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.49\textwidth}
@@ -326,7 +340,7 @@ We intend to observe the variation in our estimate of $p$ for different $K$ and 
 \setcounter{figure}{0}
 \subsection{Description}
 We have two countries - Italy and Australia. \\
-We have gender ratios $r = (r_1, \cdots ,r_n)$ of different years given to us for a specific country. \\
+We have gender ratios $r = (r_1, \dots ,r_n)$ of different years given to us for a specific country. \\
 We observe that $r_i \sim \mathrm{Uniform}[\theta-\beta, \theta+\beta]$. \\
 Given a sample, we hypothesise H0 (Null hypothesis) and H1 (Alternative hypothesis). \\
 H0: Country is Italy \\
@@ -417,7 +431,7 @@ We intend to observe the values of Type I error and Type II error for both the t
 \setcounter{figure}{0}
 \subsection{Description}
 We have two countries - Italy and Australia. \\
-We have population growth rate $g = (g_1, \cdots ,g_n)$ of different years given to us for a specific country. \\
+We have population growth rate $g = (g_1, \dots ,g_n)$ of different years given to us for a specific country. \\
 We observe that, if the ``specific country'' is Italy, $g_i \sim \mathcal{N}(\mu_1, \sigma_1^2)$; and if the ``specific country'' is Australia, $g_i \sim \mathcal{N}(\mu_2, \sigma_2^2)$. \\
 Given a sample, we hypothesise H0 (Null hypothesis) and H1 (Alternative hypothesis). Our tests are based on the sample mean (i.e. since $g$ is our given sample, this would be mean($g$) which is a sufficient statistic). Our samples belong to either Italy(where true mean is $g_1$) or Australia(where true mean is $g_2$).   \\
 H0: Country is Italy (i.e. $\mu$ = $\mu_1$) \\
