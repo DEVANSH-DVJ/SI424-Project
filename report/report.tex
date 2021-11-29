@@ -115,17 +115,36 @@ $\mathrm{min}(x)$ denotes minimum of elements in vector $x$.
 \newpage
 \section{Parameter estimation Problem 1}
 \setcounter{figure}{0}
-\subsection{Description}
-The population growth rate of Italy follows $\mathcal{N}(\mu, \sigma^2)$ distribution. \\
-We have population growth rate $g = (g_1, \cdots ,g_n)$ of different years given to us for Italy. \\
-Estimated values are $\hat{\mu}_{MLE} = \mathrm{mean}(g)$ and $\hat{\sigma}_{MLE} = \sqrt{ \mathrm{mean}((g - \hat{\mu}_{MLE})^2) }$.
+\subsection{Analysis of Population Growth Rate}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{P1/plot.png}
+        \caption[]{Plot of Population Growth Rate of Italy Vs Year}
+    \end{subfigure}
+    \begin{subfigure}[H]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{P1/hist.png}
+        \caption[]{Histogram of Population Growth Rate of Italy}
+    \end{subfigure}
+    \caption{Analysis of Population Growth Rate of Italy}
+\end{figure}
 
-\subsection{Experiment}
-From \verb!population_Country.csv!, we determine population growth rate for Italy. \\
+From the above obtained plot and histogram, we can approximate population growth rate of Italy as a constant $\mu$ with zero-mean additive Gaussian noise, i.e. population growth rate of Italy $\sim \mathcal{N}(\mu, \sigma^2)$. \\
+
+\subsection{Problem Description}
+We assume that the population growth rate of Italy follows $\mathcal{N}(\mu, \sigma^2)$ distribution. \\
+We are given a sample of population growth rate $g = (g_1, \cdots ,g_K)$ where $K$ is the sample size. \\
+Estimated values are $\hat{\mu}_{MLE} = \mathrm{mean}(g)$ and $\hat{\sigma}_{MLE} = \sqrt{ \mathrm{mean}((g - \hat{\mu}_{MLE})^2) }$. \\
+We perform this experiment for $N$ iterations for a fixed $K$. \\
+We analyze the observed estimated of $\mu$ and $\sigma$ for different $K$ and $N$. \\
+
+\subsection{Generation of Sample}
+From \verb!population_Country.csv!, we determine year-wise population growth rate for Italy from 1872 to 2018 (list of size 147). \\
 The population growth rates are computed as percentage change in population (using \verb!Total2! column) for every year. \\
-The size of the list is 147 for Italy. \\
-We randomly choose a $K$ sized subset $(K \le 147)$ of the list (i.e. take a $K$-sized sample). We compute the estimate of $\mu$ and $\sigma$ ($\hat{\mu}_{MLE}$ and $\hat{\sigma}_{MLE}$) using this sample. We repeat this for $N$ iterations. Basically, we carry out $N$ experiments of estimation on $K$ sized sample. \\
-We intend to observe the variation in our estimate of $\mu$ and $\sigma$ for different $K$ and $N$.
+Our $K$-sized sample is a randomly chosen $K$-sized subset $(K \le 147)$ of the above obtained list. \\
+We use function \verb!numpy.random.choice! with suitable arguments to obtain this sample. \\
 
 \subsection{Results}
 \subsubsection{Estimate of $\mu$}
@@ -133,88 +152,88 @@ We intend to observe the variation in our estimate of $\mu$ and $\sigma$ for dif
     \centering
     \begin{subfigure}[H]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{P1_mu/avgs_10.png}
+        \includegraphics[width=\textwidth]{P1/mu/avgs_10.png}
         \caption[]{Average value of $\hat{\mu}_{MLE}$ observed}
     \end{subfigure}
     \begin{subfigure}[H]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{P1_mu/stds_10.png}
+        \includegraphics[width=\textwidth]{P1/mu/stds_10.png}
         \caption[]{Std. deviation of $\hat{\mu}_{MLE}$ observed}
     \end{subfigure}
     \caption{Number of iterations, $N = 10$}
-\end{figure}
-\newpage
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[H]{0.49\textwidth}
-        \centering`
-        \includegraphics[width=\textwidth]{P1_mu/avgs_100.png}
-        \caption[]{Average value of $\hat{\mu}_{MLE}$ observed}
-    \end{subfigure}
-    \begin{subfigure}[H]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{P1_mu/stds_100.png}
-        \caption[]{Std. deviation of $\hat{\mu}_{MLE}$ observed}
-    \end{subfigure}
-    \caption{Number of iterations, $N = 100$}
 \end{figure}
 \vspace{30pt}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{P1_mu/avgs_1000.png}
+        \centering`
+        \includegraphics[width=\textwidth]{P1/mu/avgs_100.png}
         \caption[]{Average value of $\hat{\mu}_{MLE}$ observed}
     \end{subfigure}
     \begin{subfigure}[H]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{P1_mu/stds_1000.png}
+        \includegraphics[width=\textwidth]{P1/mu/stds_100.png}
+        \caption[]{Std. deviation of $\hat{\mu}_{MLE}$ observed}
+    \end{subfigure}
+    \caption{Number of iterations, $N = 100$}
+\end{figure}
+\newpage
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{P1/mu/avgs_1000.png}
+        \caption[]{Average value of $\hat{\mu}_{MLE}$ observed}
+    \end{subfigure}
+    \begin{subfigure}[H]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{P1/mu/stds_1000.png}
         \caption[]{Std. deviation of $\hat{\mu}_{MLE}$ observed}
     \end{subfigure}
     \caption{Number of iterations, $N = 1000$}
 \end{figure}
-\newpage
+\vspace{30pt}
 \subsubsection{Estimate of $\sigma$}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{P1_sigma/avgs_10.png}
+        \includegraphics[width=\textwidth]{P1/sigma/avgs_10.png}
         \caption[]{Average value of $\hat{\sigma}_{MLE}$ observed}
     \end{subfigure}
     \begin{subfigure}[H]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{P1_sigma/stds_10.png}
+        \includegraphics[width=\textwidth]{P1/sigma/stds_10.png}
         \caption[]{Std. deviation of $\hat{\sigma}_{MLE}$ observed}
     \end{subfigure}
     \caption{Number of iterations, $N = 10$}
-\end{figure}
-\vspace{30pt}
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[H]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{P1_sigma/avgs_100.png}
-        \caption[]{Average value of $\hat{\sigma}_{MLE}$ observed}
-    \end{subfigure}
-    \begin{subfigure}[H]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{P1_sigma/stds_100.png}
-        \caption[]{Std. deviation of $\hat{\sigma}_{MLE}$ observed}
-    \end{subfigure}
-    \caption{Number of iterations, $N = 100$}
 \end{figure}
 \newpage
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{P1_sigma/avgs_1000.png}
+        \includegraphics[width=\textwidth]{P1/sigma/avgs_100.png}
         \caption[]{Average value of $\hat{\sigma}_{MLE}$ observed}
     \end{subfigure}
     \begin{subfigure}[H]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{P1_sigma/stds_1000.png}
+        \includegraphics[width=\textwidth]{P1/sigma/stds_100.png}
+        \caption[]{Std. deviation of $\hat{\sigma}_{MLE}$ observed}
+    \end{subfigure}
+    \caption{Number of iterations, $N = 100$}
+\end{figure}
+\vspace{30pt}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{P1/sigma/avgs_1000.png}
+        \caption[]{Average value of $\hat{\sigma}_{MLE}$ observed}
+    \end{subfigure}
+    \begin{subfigure}[H]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{P1/sigma/stds_1000.png}
         \caption[]{Std. deviation of $\hat{\sigma}_{MLE}$ observed}
     \end{subfigure}
     \caption{Number of iterations, $N = 1000$}
@@ -251,12 +270,12 @@ We intend to observe the variation in our estimate of $p$ for different $K$ and 
     \centering
     \begin{subfigure}[H]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{P2_p/avgs_10.png}
+        \includegraphics[width=\textwidth]{P2/avgs_10.png}
         \caption[]{Average value of $\hat{p}_{MLE}$ observed}
     \end{subfigure}
     \begin{subfigure}[H]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{P2_p/stds_10.png}
+        \includegraphics[width=\textwidth]{P2/stds_10.png}
         \caption[]{Std. deviation of $\hat{p}_{MLE}$ observed}
     \end{subfigure}
     \caption{Number of iterations, $N = 10$}
@@ -266,12 +285,12 @@ We intend to observe the variation in our estimate of $p$ for different $K$ and 
     \centering
     \begin{subfigure}[H]{0.49\textwidth}
         \centering`
-        \includegraphics[width=\textwidth]{P2_p/avgs_100.png}
+        \includegraphics[width=\textwidth]{P2/avgs_100.png}
         \caption[]{Average value of $\hat{p}_{MLE}$ observed}
     \end{subfigure}
     \begin{subfigure}[H]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{P2_p/stds_100.png}
+        \includegraphics[width=\textwidth]{P2/stds_100.png}
         \caption[]{Std. deviation of $\hat{p}_{MLE}$ observed}
     \end{subfigure}
     \caption{Number of iterations, $N = 100$}
@@ -281,12 +300,12 @@ We intend to observe the variation in our estimate of $p$ for different $K$ and 
     \centering
     \begin{subfigure}[H]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{P2_p/avgs_1000.png}
+        \includegraphics[width=\textwidth]{P2/avgs_1000.png}
         \caption[]{Average value of $\hat{p}_{MLE}$ observed}
     \end{subfigure}
     \begin{subfigure}[H]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{P2_p/stds_1000.png}
+        \includegraphics[width=\textwidth]{P2/stds_1000.png}
         \caption[]{Std. deviation of $\hat{p}_{MLE}$ observed}
     \end{subfigure}
     \caption{Number of iterations, $N = 1000$}
@@ -400,9 +419,9 @@ We intend to observe the values of Type I error and Type II error for both the t
 We have two countries - Italy and Australia. \\
 We have population growth rate $g = (g_1, \cdots ,g_n)$ of different years given to us for a specific country. \\
 We observe that, if the ``specific country'' is Italy, $g_i \sim \mathcal{N}(\mu_1, \sigma_1^2)$; and if the ``specific country'' is Australia, $g_i \sim \mathcal{N}(\mu_2, \sigma_2^2)$. \\
-Given a sample, we hypothesise H0 (Null hypothesis) and H1 (Alternative hypothesis). \\
-H0: Country is Italy \\
-H1: Country is Australia \\
+Given a sample, we hypothesise H0 (Null hypothesis) and H1 (Alternative hypothesis). Our tests are based on the sample mean (i.e. since $g$ is our given sample, this would be mean($g$) which is a sufficient statistic). Our samples belong to either Italy(where true mean is $g_1$) or Australia(where true mean is $g_2$).   \\
+H0: Country is Italy (i.e. $\mu$ = $\mu_1$) \\
+H1: Country is Not Italy (in which case the only possibility is that the country is Australia) (i.e. $\mu \neq \mu_1$, i.e.  $\mu = \mu_2$  ) \\
 We perform following test to accept/reject H0. \\
 Test: Reject H0 if $\hat{\mu}_{MLE} = \mathrm{mean}(g) > 1.2$
 
